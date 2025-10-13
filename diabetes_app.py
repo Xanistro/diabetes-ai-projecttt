@@ -7,7 +7,7 @@ model = joblib.load("diabetes_model.pkl")
 
 # Web app title
 st.title("🤖 AI Diabetes Prediction App")
-st.write("This AI model predicts the likelihood of diabetes based on medical data.")
+st.write("This AI model predicts the likelihood of diabetes based on patient health data.")
 
 # Input fields
 st.header("🩺 Enter Patient Information")
@@ -24,7 +24,17 @@ age = st.number_input("Age", 0, 120, 30)
 if st.button("Predict"):
     input_data = np.array([[pregnancies, glucose, blood_pressure, skin_thickness,
                             insulin, bmi, dpf, age]])
-    prediction = model.predict(input_data)
-    result = "🟢 No Diabetes Detected" if prediction[0] == 0 else "🔴 Diabetes Likely"
-    st.subheader("Prediction Result:")
-    st.write(result)
+    # Predict probability
+    probability = model.predict_proba(input_data)[0][1]  # chance of having diabetes
+    percent = round(probability * 100, 2)
+
+    st.subheader("📊 Diabetes Risk Result:")
+    st.write(f"Estimated risk of diabetes: **{percent}%**")
+
+    # Give a little color feedback
+    if percent < 30:
+        st.success("🟢 Low risk — maintain a healthy lifestyle!")
+    elif percent < 70:
+        st.warning("🟡 Moderate risk — consider regular check-ups.")
+    else:
+        st.error("🔴 High risk — consult a doctor for further testing.")
