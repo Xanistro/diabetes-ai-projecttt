@@ -1,4 +1,4 @@
-# 🤖 AI Diabetes Prediction App
+# AI Diabetes Prediction
 
 This project uses artificial intelligence to predict the chance of diabetes using patient health data.
 
