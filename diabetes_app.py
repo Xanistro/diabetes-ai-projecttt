@@ -27,7 +27,7 @@ st.write(
 )
 
 # --- USER INPUTS ---
-st.subheader("Patient Information")
+st.subheader("🔹Patient Information 🔹")
 
 pregnancies = st.number_input("Pregnancies", min_value=0, max_value=20, value=0)
 glucose = st.number_input("Glucose (optional)", min_value=0, max_value=300, value=0)
