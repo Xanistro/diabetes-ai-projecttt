@@ -45,7 +45,7 @@ st.write("If you don't know your BMI, enter your height and weight below.")
 weight = st.number_input("Weight (kg)", min_value=0.0, max_value=300.0, value=0.0)
 height = st.number_input("Height (cm)", min_value=0.0, max_value=250.0, value=0.0)
 
-if st.button("📏 Calculate BMI"):
+if st.button("Calculate BMI"):
     if height > 0 and weight > 0:
         calculated_bmi = weight / ((height / 100) ** 2)
         st.success(f"Your calculated BMI is **{calculated_bmi:.2f}**")
@@ -66,7 +66,7 @@ input_df = pd.DataFrame({
 })
 
 # --- PREDICTION BUTTON ---
-if st.button("🔍 Predict Diabetes Risk"):
+if st.button("Predict Diabetes Risk"):
     optional_skipped = False
 
     # Replace missing/zero data with average values
