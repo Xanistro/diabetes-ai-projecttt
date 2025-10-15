@@ -89,11 +89,11 @@ if st.button("Predict Diabetes Risk"):
             )
 
         if probability < 30:
-            st.success("✅ Low risk. Keep maintaining a healthy lifestyle!")
+            st.success("Low risk. Keep maintaining a healthy lifestyle!")
         elif probability < 70:
-            st.warning("⚠️ Moderate risk. Consider regular check-ups and balanced nutrition.")
+            st.warning("Moderate risk. Consider regular check-ups and balanced nutrition.")
         else:
-            st.error("🚨 High risk. Please consult a healthcare professional soon.")
+            st.error("High risk. Please consult a healthcare professional soon.")
 
     except Exception as e:
         st.error("❌ An error occurred while making the prediction.")
