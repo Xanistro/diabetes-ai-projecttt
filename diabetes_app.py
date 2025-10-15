@@ -39,7 +39,7 @@ dpf = st.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=3.0
 age = st.number_input("Age", min_value=1, max_value=120, value=30)
 
 # --- BMI CALCULATOR ---
-st.subheader("⚖️ BMI Calculator (Optional)")
+st.subheader("BMI Calculator (Optional)")
 st.write("If you don't know your BMI, enter your height and weight below.")
 
 weight = st.number_input("Weight (kg)", min_value=0.0, max_value=300.0, value=0.0)
