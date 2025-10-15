@@ -19,7 +19,7 @@ AVERAGE_VALUES = {
 }
 
 # --- HEADER ---
-st.title("Diabetes Risk Prediction App")
+st.title("Diabetes Risk Prediction")
 st.write(
     "Enter your health information below to estimate your diabetes risk. "
     "If you leave optional fields blank, average values will be used, "
