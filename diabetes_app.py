@@ -19,18 +19,19 @@ BMI = st.number_input("BMI", min_value=0.0, max_value=70.0, value=25.0)
 DiabetesPedigreeFunction = st.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=2.5, value=0.5)
 Age = st.number_input("Age", min_value=1, max_value=120, value=30)
 
-# --- PREP INPUT DATA ---
+# Collect user input
 input_data = {
-    "Pregnancies": Pregnancies,
-    "Glucose": Glucose if Glucose != 0 else None,
-    "BloodPressure": BloodPressure,
-    "SkinThickness": SkinThickness,
-    "Insulin": Insulin if Insulin != 0 else None,
-    "BMI": BMI,
-    "DiabetesPedigreeFunction": DiabetesPedigreeFunction,
-    "Age": Age
+    "Pregnancies": pregnancies,
+    "Glucose": glucose if glucose > 0 else np.nan,
+    "BloodPressure": blood_pressure,
+    "SkinThickness": skin_thickness,
+    "Insulin": insulin if insulin > 0 else np.nan,
+    "BMI": bmi,
+    "DiabetesPedigreeFunction": dpf,
+    "Age": age
 }
 
+# Create DataFrame
 input_df = pd.DataFrame([input_data])
 
 # --- HANDLE OPTIONAL VALUES ---
