@@ -13,7 +13,11 @@ st.write("This AI model predicts the likelihood of diabetes based on patient hea
 st.header("🩺 Enter Patient Information")
 pregnancies = st.number_input("Number of Pregnancies", 0, 20, 0)
 glucose = st.number_input("Glucose Level", 0, 300, 120)
-blood_pressure = st.number_input("Blood Pressure", 0, 200, 70)
+BloodPressure = st.number_input(
+    "Diastolic Blood Pressure (bottom number of your BP reading, in mm Hg)", 
+    min_value=0, max_value=200, value=80
+)
+
 skin_thickness = st.number_input("Skin Thickness", 0, 99, 20)
 insulin = st.number_input("Insulin Level", 0, 900, 80)
 bmi = st.number_input("BMI (Body Mass Index)", 0.0, 70.0, 25.0)
