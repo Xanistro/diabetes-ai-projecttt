@@ -58,7 +58,7 @@ st.write(f"Estimated risk of diabetes: **{percent}%**")
 # Give a little color feedback
 if percent < 30:
         st.success("🟢 Low risk — maintain a healthy lifestyle!")
-    elif percent < 70:
+elif percent < 70:
         st.warning("🟡 Moderate risk — consider regular check-ups.")
-    else:
+else:
         st.error("🔴 High risk — consult a doctor for further testing.")
