@@ -22,7 +22,7 @@ AVERAGE_VALUES = {
 st.title("Diabetes Risk Prediction App")
 st.write(
     "Enter your health information below to estimate your diabetes risk. "
-    "If you leave optional fields blank, average values will be used — "
+    "If you leave optional fields blank, average values will be used, "
     "but predictions may be less accurate."
 )
 
