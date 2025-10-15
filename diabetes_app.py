@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import joblib
 
-# Load model
+# --- Load model ---
 model = joblib.load("diabetes_model.pkl")
 
 # --- Average values from dataset ---
@@ -53,39 +53,41 @@ if st.button("Calculate BMI"):
     else:
         st.warning("Please enter both height and weight to calculate BMI.")
 
-# --- DATA PREPARATION ---
-input_df = pd.DataFrame({
-    'Pregnancies': [pregnancies],
-    'Glucose': [glucose],
-    'BloodPressure': [blood_pressure],
-    'SkinThickness': [skin_thickness],
-    'Insulin': [insulin],
-    'BMI': [bmi],
-    'DiabetesPedigreeFunction': [dpf],
-    'Age': [age]
-})
+# --- PREPARE INPUT DATA ---
+input_data = {
+    'Pregnancies': pregnancies,
+    'Glucose': glucose,
+    'BloodPressure': blood_pressure,
+    'SkinThickness': skin_thickness,
+    'Insulin': insulin,
+    'BMI': bmi,
+    'DiabetesPedigreeFunction': dpf,
+    'Age': age
+}
 
-# --- PREDICTION BUTTON ---
+# --- PREDICT BUTTON ---
 if st.button("Predict Diabetes Risk"):
     optional_skipped = False
 
-    # Replace missing/zero data with average values
-    for col in input_df.columns:
-        if input_df[col].iloc[0] == 0:
-            input_df[col] = AVERAGE_VALUES[col]
+    # Replace missing/zero data safely with average values
+    for key, value in input_data.items():
+        if value == 0:
+            input_data[key] = AVERAGE_VALUES[key]
             optional_skipped = True
+
+    input_df = pd.DataFrame([input_data])
 
     # --- PREDICTION ---
     try:
         probability = model.predict_proba(input_df)[0][1] * 100
 
         st.subheader("Prediction Result")
-        st.write(f"**Estimated Diabetes Risk:** {probability:.2f}%")
+        st.metric(label="Estimated Diabetes Risk", value=f"{probability:.2f}%")
 
         if optional_skipped:
             st.info(
-                "ℹ️ Some fields were left blank and estimated using average values. "
-                "This may make your prediction less accurate."
+                "ℹ️ Some optional fields were left blank and replaced with average values. "
+                "Results may be less accurate."
             )
 
         if probability < 30:
@@ -96,5 +98,6 @@ if st.button("Predict Diabetes Risk"):
             st.error("High risk. Please consult a healthcare professional soon.")
 
     except Exception as e:
-        st.error("❌ An error occurred while making the prediction.")
+        st.error(" An error occurred while making the prediction.")
+        st.caption("Please check that all required inputs are filled correctly.")
         st.write(e)
