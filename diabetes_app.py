@@ -48,9 +48,9 @@ prediction = model.predict_proba(input_scaled)[0][1] * 100  # risk percentage
 st.subheader("🩺 Diabetes Risk Prediction")
 st.write(f"Your estimated risk of diabetes is **{prediction:.1f}%**.")
 
-    # Predict probability
-    probability = model.predict_proba(input_data)[0][1]  # chance of having diabetes
-    percent = round(probability * 100, 2)
+# Predict probability
+probability = model.predict_proba(input_data)[0][1]  # chance of having diabetes
+percent = round(probability * 100, 2)
 
     st.subheader("📊 Diabetes Risk Result:")
     st.write(f"Estimated risk of diabetes: **{percent}%**")
