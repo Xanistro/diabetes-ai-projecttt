@@ -79,7 +79,7 @@ if st.button("Predict Diabetes Risk"):
     try:
         probability = model.predict_proba(input_df)[0][1] * 100
 
-        st.subheader("📊 Prediction Result")
+        st.subheader("Prediction Result")
         st.write(f"**Estimated Diabetes Risk:** {probability:.2f}%")
 
         if optional_skipped:
