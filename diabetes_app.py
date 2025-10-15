@@ -52,11 +52,11 @@ st.write(f"Your estimated risk of diabetes is **{prediction:.1f}%**.")
 probability = model.predict_proba(input_data)[0][1]  # chance of having diabetes
 percent = round(probability * 100, 2)
 
-    st.subheader("📊 Diabetes Risk Result:")
-    st.write(f"Estimated risk of diabetes: **{percent}%**")
+st.subheader("📊 Diabetes Risk Result:")
+st.write(f"Estimated risk of diabetes: **{percent}%**")
 
-    # Give a little color feedback
-    if percent < 30:
+# Give a little color feedback
+if percent < 30:
         st.success("🟢 Low risk — maintain a healthy lifestyle!")
     elif percent < 70:
         st.warning("🟡 Moderate risk — consider regular check-ups.")
