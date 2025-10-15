@@ -9,25 +9,45 @@ model = joblib.load("diabetes_model.pkl")
 st.title("🤖 AI Diabetes Prediction App")
 st.write("This AI model predicts the likelihood of diabetes based on patient health data.")
 
-# Input fields
-st.header("🩺 Enter Patient Information")
-pregnancies = st.number_input("Number of Pregnancies", 0, 20, 0)
-glucose = st.number_input("Glucose Level", 0, 300, 120)
-BloodPressure = st.number_input(
-    "Diastolic Blood Pressure (bottom number of your BP reading, in mm Hg)", 
-    min_value=0, max_value=200, value=80
-)
+# --- USER INPUTS ---
+Pregnancies = st.number_input("Pregnancies", min_value=0, max_value=20, value=0)
+Glucose = st.number_input("Glucose Level (mg/dL) — leave 0 if unknown", min_value=0, max_value=300, value=0)
+BloodPressure = st.number_input("Diastolic Blood Pressure (bottom number of your BP reading, mm Hg)", min_value=0, max_value=200, value=80)
+SkinThickness = st.number_input("Skin Thickness (mm)", min_value=0, max_value=100, value=20)
+Insulin = st.number_input("Insulin Level (μU/mL) — leave 0 if unknown", min_value=0, max_value=900, value=0)
+BMI = st.number_input("BMI", min_value=0.0, max_value=70.0, value=25.0)
+DiabetesPedigreeFunction = st.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=2.5, value=0.5)
+Age = st.number_input("Age", min_value=1, max_value=120, value=30)
 
-skin_thickness = st.number_input("Skin Thickness", 0, 99, 20)
-insulin = st.number_input("Insulin Level", 0, 900, 80)
-bmi = st.number_input("BMI (Body Mass Index)", 0.0, 70.0, 25.0)
-dpf = st.number_input("Diabetes Pedigree Function", 0.0, 3.0, 0.5)
-age = st.number_input("Age", 0, 120, 30)
+# --- PREP INPUT DATA ---
+input_data = {
+    "Pregnancies": Pregnancies,
+    "Glucose": Glucose if Glucose != 0 else None,
+    "BloodPressure": BloodPressure,
+    "SkinThickness": SkinThickness,
+    "Insulin": Insulin if Insulin != 0 else None,
+    "BMI": BMI,
+    "DiabetesPedigreeFunction": DiabetesPedigreeFunction,
+    "Age": Age
+}
 
-# Button to predict
-if st.button("Predict"):
-    input_data = np.array([[pregnancies, glucose, blood_pressure, skin_thickness,
-                            insulin, bmi, dpf, age]])
+input_df = pd.DataFrame([input_data])
+
+# --- HANDLE OPTIONAL VALUES ---
+# Fill missing Glucose or Insulin with dataset averages
+if "Glucose" in input_df.columns and input_df["Glucose"].isna().any():
+    input_df["Glucose"].fillna(model_data["Glucose"].mean(), inplace=True)
+
+if "Insulin" in input_df.columns and input_df["Insulin"].isna().any():
+    input_df["Insulin"].fillna(model_data["Insulin"].mean(), inplace=True)
+
+# --- SCALE AND PREDICT ---
+input_scaled = scaler.transform(input_df)
+prediction = model.predict_proba(input_scaled)[0][1] * 100  # risk percentage
+
+st.subheader("🩺 Diabetes Risk Prediction")
+st.write(f"Your estimated risk of diabetes is **{prediction:.1f}%**.")
+
     # Predict probability
     probability = model.predict_proba(input_data)[0][1]  # chance of having diabetes
     percent = round(probability * 100, 2)
