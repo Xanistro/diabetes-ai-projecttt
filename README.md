@@ -1,5 +1,7 @@
 # AI Diabetes Prediction
 
+DISCLAIMER: THIS IS NOT MEANT TO DIAGNOSE OR OVERRULE A DOCTORS DIAGNOSIS OF DIABETES 
+
 This project uses artificial intelligence to predict the chance of diabetes using patient health data.
 
 ### How it works:
