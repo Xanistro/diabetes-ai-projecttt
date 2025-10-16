@@ -22,7 +22,7 @@ AVERAGE_VALUES = {
 st.title("Diabetes Risk Prediction")
 st.write(
     "Enter your health information below to estimate your diabetes risk. "
-    "If you leave optional fields blank, average values will be used, "
+    "You can leave some fields blank, average values will be used, "
     "but predictions may be less accurate."
 )
 
@@ -30,10 +30,10 @@ st.write(
 st.subheader("🔹Patient Information 🔹")
 
 pregnancies = st.number_input("Pregnancies", min_value=0, max_value=20, value=0)
-glucose = st.number_input("Glucose (optional)", min_value=0, max_value=300, value=0)
-blood_pressure = st.number_input("Blood Pressure", min_value=0, max_value=200, value=70)
+glucose = st.number_input("Glucose", min_value=0, max_value=300, value=0)
+blood_pressure = st.number_input("Blood Pressure (diastolic)", min_value=0, max_value=200, value=70)
 skin_thickness = st.number_input("Skin Thickness (mm)", min_value=0, max_value=100, value=20)
-insulin = st.number_input("Insulin (optional)", min_value=0, max_value=900, value=0)
+insulin = st.number_input("Insulin", min_value=0, max_value=900, value=0)
 bmi = st.number_input("BMI", min_value=0.0, max_value=70.0, value=0.0)
 dpf = st.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=3.0, value=0.5)
 age = st.number_input("Age", min_value=1, max_value=120, value=30)
