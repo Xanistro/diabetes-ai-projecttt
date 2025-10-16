@@ -21,6 +21,7 @@ AVERAGE_VALUES = {
 # --- HEADER ---
 st.title("Diabetes Risk Prediction")
 st.write(
+    "Disclaimer: This is not meant to diagnose or overrule a doctor's diagnosis of diabetes"
     "Enter your health information below to estimate your diabetes risk. "
     "You can leave some fields blank, average values will be used, "
     "but predictions may be less accurate."
