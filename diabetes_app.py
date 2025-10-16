@@ -6,6 +6,19 @@ import joblib
 # --- Load model ---
 model = joblib.load("diabetes_model.pkl")
 
+# --- Outline color ---
+st.markdown("""
+    <style>
+    /* Make input boxes have a blue outline when focused */
+    input:focus {
+        border: 2px solid #1E90FF !important;  /* DodgerBlue color */
+        outline: none !important;
+        box-shadow: 0 0 5px #1E90FF !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+
 # --- Average values from dataset ---
 AVERAGE_VALUES = {
     "Pregnancies": 3.8,
