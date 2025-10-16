@@ -19,12 +19,15 @@ AVERAGE_VALUES = {
 }
 
 # --- HEADER ---
-st.title("Diabetes Risk Prediction")
-st.write(
-    "Disclaimer: This is not meant to diagnose or overrule a doctor's diagnosis of diabetes. "
-    "    Enter your health information below to estimate your diabetes risk. "
-    "You can leave some fields blank, average values will be used, "
-    "but predictions may be less accurate."
+st.markdown(
+    """
+    <p style='color:red; font-size:16px;'>
+    ⚠️ <b>Disclaimer:</b> This app does not diagnose diabetes and should not replace a medical professional’s advice.<br>
+    Enter your health information below to estimate your diabetes risk.<br>
+    You can leave some fields blank; average values will be used, but predictions may be less accurate.
+    </p>
+    """,
+    unsafe_allow_html=True
 )
 
 # --- USER INPUTS ---
