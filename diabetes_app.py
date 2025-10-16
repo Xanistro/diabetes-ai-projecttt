@@ -28,7 +28,7 @@ st.markdown(
 st.markdown(
     """
     <div style='background-color:03002E; padding:10px; border-radius:10px;'>
-    <p style='color:#9C1800; font-size:16px;'>
+    <p style='color:#D2042D; font-size:16px;'>
     ⚠️ <b>Disclaimer:</b> This app does not diagnose diabetes and should not replace a medical professional’s advice.<br>
      <p style='color:##FFFFFF; font-size:16px;'>
     Enter your health information below to estimate your diabetes risk.<br>
