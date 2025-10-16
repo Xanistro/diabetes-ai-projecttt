@@ -50,7 +50,7 @@ skin_thickness = st.number_input("Skin Thickness (mm)", min_value=0, max_value=1
 insulin = st.number_input("Insulin", min_value=0, max_value=900, value=0)
 bmi = st.number_input("BMI", min_value=0.0, max_value=70.0, value=0.0)
 dpf = st.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=3.0, value=0.0)
-age = st.number_input("Age", min_value=1, max_value=120, value=0)
+age = st.number_input("Age", min_value=1, max_value=120, value=1)
 
 # --- BMI CALCULATOR ---
 st.subheader("BMI Calculator")
