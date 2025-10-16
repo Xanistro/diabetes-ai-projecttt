@@ -18,17 +18,26 @@ AVERAGE_VALUES = {
     "Age": 33.0
 }
 
-# --- HEADER ---
+# TITLE
+st.markdown(
+    "<h1 style='color:#1E90FF;'>💉 Diabetes Risk Prediction</h1>",
+    unsafe_allow_html=True
+)
+
+# RED DISCLAIMER
 st.markdown(
     """
+    <div style='background-color:#ffe6e6; padding:10px; border-radius:10px;'>
     <p style='color:red; font-size:16px;'>
     ⚠️ <b>Disclaimer:</b> This app does not diagnose diabetes and should not replace a medical professional’s advice.<br>
     Enter your health information below to estimate your diabetes risk.<br>
     You can leave some fields blank; average values will be used, but predictions may be less accurate.
     </p>
+    </div>
     """,
     unsafe_allow_html=True
 )
+
 
 # --- USER INPUTS ---
 st.subheader("🔹Patient Information 🔹")
