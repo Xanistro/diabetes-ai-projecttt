@@ -20,7 +20,7 @@ AVERAGE_VALUES = {
 
 # TITLE
 st.markdown(
-    "<h1 style='color:#1E90FF;'>Diabetes Risk Prediction</h1>",
+    "<h1 style='color:#FFFFFF;'>Diabetes Risk Prediction</h1>",
     unsafe_allow_html=True
 )
 
