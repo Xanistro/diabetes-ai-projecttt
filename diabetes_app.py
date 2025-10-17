@@ -6,17 +6,46 @@ import joblib
 # --- Load model ---
 model = joblib.load("diabetes_model.pkl")
 
-# --- Average values from dataset ---
-AVERAGE_VALUES = {
-    "Pregnancies": 3.8,
-    "Glucose": 120.9,
-    "BloodPressure": 69.1,
-    "SkinThickness": 20.5,
-    "Insulin": 79.8,
-    "BMI": 32.0,
-    "DiabetesPedigreeFunction": 0.47,
-    "Age": 33.0
+# --- Average values by age range (Pregnancies excluded) ---
+AGE_BASED_AVERAGES = {
+    "13-19": {
+        "Glucose": 90.5,
+        "BloodPressure": 65.0,
+        "SkinThickness": 18.0,
+        "Insulin": 60.0,
+        "BMI": 22.5,
+        "DiabetesPedigreeFunction": 0.35,
+        "Age": 16.0
+    },
+    "20-39": {
+        "Glucose": 110.0,
+        "BloodPressure": 70.0,
+        "SkinThickness": 20.0,
+        "Insulin": 75.0,
+        "BMI": 27.5,
+        "DiabetesPedigreeFunction": 0.45,
+        "Age": 30.0
+    },
+    "40-59": {
+        "Glucose": 130.0,
+        "BloodPressure": 72.0,
+        "SkinThickness": 22.0,
+        "Insulin": 85.0,
+        "BMI": 30.0,
+        "DiabetesPedigreeFunction": 0.50,
+        "Age": 50.0
+    },
+    "60+": {
+        "Glucose": 140.0,
+        "BloodPressure": 75.0,
+        "SkinThickness": 23.0,
+        "Insulin": 90.0,
+        "BMI": 31.0,
+        "DiabetesPedigreeFunction": 0.55,
+        "Age": 65.0
+    }
 }
+
 
 # TITLE
 st.markdown(
@@ -83,10 +112,20 @@ input_data = {
 if st.button("Predict Diabetes Risk"):
     optional_skipped = False
 
-    # Replace missing/zero data safely with average values
+    # Choose average values based on user's age range
+    if 13 <= age <= 19:
+        avg_values = AGE_BASED_AVERAGES["13-19"]
+    elif 20 <= age <= 39:
+        avg_values = AGE_BASED_AVERAGES["20-39"]
+    elif 40 <= age <= 59:
+        avg_values = AGE_BASED_AVERAGES["40-59"]
+    else:
+        avg_values = AGE_BASED_AVERAGES["60+"]
+
+    # Replace missing/zero data safely with age-based averages (skip pregnancies)
     for key, value in input_data.items():
-        if value == 0:
-            input_data[key] = AVERAGE_VALUES[key]
+        if key != "Pregnancies" and value == 0:
+            input_data[key] = avg_values[key]
             optional_skipped = True
 
     input_df = pd.DataFrame([input_data])
@@ -100,8 +139,8 @@ if st.button("Predict Diabetes Risk"):
 
         if optional_skipped:
             st.info(
-                "ℹ️ Some optional fields were left blank and replaced with average values. "
-                "Results may be less accurate."
+                f"ℹ️ Some fields were left blank and estimated using average values for your age group ({age} years old). "
+                "Pregnancies were not estimated."
             )
 
         if probability < 30:
@@ -110,6 +149,12 @@ if st.button("Predict Diabetes Risk"):
             st.warning("Moderate risk. Consider regular check-ups and balanced nutrition.")
         else:
             st.error("High risk. Please consult a healthcare professional soon.")
+
+    except Exception as e:
+        st.error("An error occurred while making the prediction.")
+        st.caption("Please check that all required inputs are filled correctly.")
+        st.write(e)
+
 
     except Exception as e:
         st.error(" An error occurred while making the prediction.")
