@@ -144,6 +144,7 @@ if st.button("Predict Diabetes Risk"):
         if optional_skipped:
             st.info(
                 f"ℹ️ Some fields were left blank and estimated using average values for the **{age_group}** age group. "
+                "This may make the prediction less accurate."
             )
 
         if probability < 30:
