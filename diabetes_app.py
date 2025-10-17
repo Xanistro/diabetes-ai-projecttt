@@ -115,12 +115,16 @@ if st.button("Predict Diabetes Risk"):
     # Choose average values based on user's age range
     if 13 <= age <= 19:
         avg_values = AGE_BASED_AVERAGES["13-19"]
+        age_group = "13–19"
     elif 20 <= age <= 39:
         avg_values = AGE_BASED_AVERAGES["20-39"]
+        age_group = "20–39"
     elif 40 <= age <= 59:
         avg_values = AGE_BASED_AVERAGES["40-59"]
+        age_group = "40–59"
     else:
         avg_values = AGE_BASED_AVERAGES["60+"]
+        age_group = "60+"
 
     # Replace missing/zero data safely with age-based averages (skip pregnancies)
     for key, value in input_data.items():
@@ -139,7 +143,7 @@ if st.button("Predict Diabetes Risk"):
 
         if optional_skipped:
             st.info(
-                f"ℹ️ Some fields were left blank and estimated using average values for your age group ({age} years old). "
+                f"ℹ️ Some fields were left blank and estimated using average values for the **{age_group}** age group. "
                 "Pregnancies were not estimated."
             )
 
@@ -152,11 +156,5 @@ if st.button("Predict Diabetes Risk"):
 
     except Exception as e:
         st.error("An error occurred while making the prediction.")
-        st.caption("Please check that all required inputs are filled correctly.")
-        st.write(e)
-
-
-    except Exception as e:
-        st.error(" An error occurred while making the prediction.")
         st.caption("Please check that all required inputs are filled correctly.")
         st.write(e)
