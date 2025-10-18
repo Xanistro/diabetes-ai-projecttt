@@ -48,10 +48,7 @@ AGE_BASED_AVERAGES = {
 
 
 # TITLE
-st.markdown(
-    "<h1 style='color:#FFFFFF;'>Diabetes Risk Prediction</h1>",
-    unsafe_allow_html=True
-)
+st.title("Diabetes Prediction")
 
 # RED DISCLAIMER
 st.markdown(
